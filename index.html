@@ -3,12 +3,24 @@
 <head>
   <title>The permitted mileage for today's date</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+      <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center; /* Horisontell centrering */
+            align-items: center;    /* Vertikal centrering */
+        }
+        .centered-text {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
   <font size="7">
-    <center>
- 
-
+    <div class="centered-text">
+       
+   
   <p>Tillåtna mil till dagens datum</p>
   <div id="output"></div>
 
@@ -1129,7 +1141,7 @@
       document.getElementById('output').innerHTML = 'No data found for today\'s date.';
     }
   </script>
-      </center>
+     </div>
     </font>
 </body>
 </html>
