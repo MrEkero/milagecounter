@@ -1119,7 +1119,7 @@
     const todaysData = data.find(row => row.date === today);
 
     if (todaysData) {
-      const output = `Dagens datum: ${todaysData.date}<br>Mil: ${todaysData.integer}`;
+      const output = `${todaysData.date}<br>${todaysData.integer} mil`;
       document.getElementById('output').innerHTML = output;
     } else {
       document.getElementById('output').innerHTML = 'No data found for today\'s date.';
