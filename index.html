@@ -8,35 +8,48 @@
   <div id="output"></div>
 
   <script>
-    const today = new Date().toISOString().slice(0, 10);
+const today = new Date().toISOString().slice(0, 10);
 
-    fetch('data.csv')
-      .then(response => response.text())
-      .then(csvData => {
-        const rows = csvData.trim().split('\n');
-        const headers = rows.shift().split(',');
-        const data = rows.map(row => {
-          const values = row.split(',');
-          const obj = {};
-          headers.forEach((header, index) => {
-            obj[header.trim()] = values[index].trim();
-          });
-          return obj;
-        });
+fetch('data.csv')
+  .then(response => response.text())
+  .then(csvData => {
+    // Check if the CSV data is empty
+    if (csvData.trim() === '') {
+      window.__csvDataResult = { error: 'CSV file is empty' };
+      return;
+    }
 
-        const todaysData = data.find(row => row.date === today);
+    const rows = csvData.trim().split('\n');
+    const headers = rows.shift().split(',');
 
-        if (todaysData) {
-          const output = `Today's date: ${todaysData.date}, Integer: ${todaysData.integer}`;
-          document.getElementById('output').innerHTML = output;
-        } else {
-          document.getElementById('output').innerHTML = 'No data found for today\'s date.';
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching or parsing CSV data:', error);
-        document.getElementById('output').innerHTML = 'Error fetching or parsing CSV data.';
+    // Check if the headers are valid
+    if (!headers.includes('date') || !headers.includes('integer')) {
+      window.__csvDataResult = { error: 'Invalid CSV headers' };
+      return;
+    }
+
+    const data = rows.map(row => {
+      const values = row.split(',');
+      const obj = {};
+      headers.forEach((header, index) => {
+        obj[header.trim()] = values[index].trim();
       });
+      return obj;
+    });
+
+    const todaysData = data.find(row => row.date === today);
+    const datesInCSV = data.map(row => row.date);
+
+    window.__csvDataResult = {
+      today: today,
+      datesInCSV: datesInCSV,
+      todaysData: todaysData ? todaysData : null
+    };
+  })
+  .catch(error => {
+    console.error('Error fetching or parsing CSV data:', error);
+    window.__csvDataResult = { error: error.message };
+  });
   </script>
 </body>
 </html>
