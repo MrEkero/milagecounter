@@ -17,57 +17,34 @@
     </table>
 
     <script>
-        const scriptElement = document.querySelector('script');
+const today = new Date().toISOString().slice(0, 10); // Get today's date in YYYY-MM-DD format
 
-if (scriptElement) {
-  const originalScript = scriptElement.textContent;
-  const modifiedScript = originalScript.replace(
-    /const todayRow = rows\.find\(row => row\[0] === today\);/,
-    `const todayDate = new Date();
-    const todayDateString = todayDate.toLocaleDateString('sv-SE');
-    const todayRow = rows.find(row => {
-      const csvDateString = row[0].trim();
-      return csvDateString === todayDateString;
-    });`
-  );
+fetch('data.csv')
+  .then(response => response.text())
+  .then(csvData => {
+    const rows = csvData.trim().split('\n');
+    const headers = rows.shift().split(',');
+    const data = rows.map(row => {
+      const values = row.split(',');
+      const obj = {};
+      headers.forEach((header, index) => {
+        obj[header.trim()] = values[index].trim();
+      });
+      return obj;
+    });
 
-  scriptElement.textContent = modifiedScript;
-  // Trigger a reload to execute the modified script
-  // eslint-disable-next-line no-restricted-globals
-  location.reload();
-} else {
-  console.error('Script element not found.');
-}
-        document.addEventListener('DOMContentLoaded', function() {
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('today-date').textContent = today;
+    const todaysData = data.find(row => row.date === today);
 
-            fetch('data.csv')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    console.log('CSV data:', data); // Lägg till denna rad för att se CSV-data i konsolen
-                    const rows = data.trim().split('\\n').map(row => row.split(','));
-                    const todayRow = rows.find(row => row[0] === today);
-
-                    console.log('Today\'s row:', todayRow); // Lägg till denna rad för att se dagens rad i konsolen
-
-                    const dataRow = document.getElementById('data-row');
-                    if (todayRow) {
-                        dataRow.innerHTML = `<td>${todayRow[0]}</td><td>${parseFloat(todayRow[1]).toFixed(2)}</td>`;
-                    } else {
-                        dataRow.innerHTML = '<td colspan="2">Ingen data för dagens datum.</td>';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching the CSV file:', error);
-                    document.getElementById('data-row').innerHTML = '<td colspan="2">Kunde inte läsa in data.</td>';
-                });
-        });
-    </script>
+    if (todaysData) {
+      const output = `Today's date: ${todaysData.date}, Integer: ${todaysData.integer}`;
+      document.body.innerHTML += `<p>${output}</p>`;
+    } else {
+      document.body.innerHTML += `<p>No data found for today's date.</p>`;
+    }
+  })
+  .catch(error => {
+    console.error('Error fetching or parsing CSV data:', error);
+    document.body.innerHTML += `<p>Error fetching or parsing CSV data.</p>`;
+  });    </script>
 </body>
 </html>
