@@ -1,50 +1,42 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>CSV Data för Dagens Datum</title>
+  <title>CSV Data Display</title>
 </head>
 <body>
-    <h1>Data för <span id="today-date"></span></h1>
-    <table border="1">
-        <tr>
-            <th>Datum</th>
-            <th>Värde</th>
-        </tr>
-        <tr id="data-row">
-            <td colspan="2">Laddar data...</td>
-        </tr>
-    </table>
+  <h1>Today's Data</h1>
+  <div id="output"></div>
 
-    <script>
-const today = new Date().toISOString().slice(0, 10); // Get today's date in YYYY-MM-DD format
+  <script>
+    const today = new Date().toISOString().slice(0, 10);
 
-fetch('data.csv')
-  .then(response => response.text())
-  .then(csvData => {
-    const rows = csvData.trim().split('\n');
-    const headers = rows.shift().split(',');
-    const data = rows.map(row => {
-      const values = row.split(',');
-      const obj = {};
-      headers.forEach((header, index) => {
-        obj[header.trim()] = values[index].trim();
+    fetch('data.csv')
+      .then(response => response.text())
+      .then(csvData => {
+        const rows = csvData.trim().split('\n');
+        const headers = rows.shift().split(',');
+        const data = rows.map(row => {
+          const values = row.split(',');
+          const obj = {};
+          headers.forEach((header, index) => {
+            obj[header.trim()] = values[index].trim();
+          });
+          return obj;
+        });
+
+        const todaysData = data.find(row => row.date === today);
+
+        if (todaysData) {
+          const output = `Today's date: ${todaysData.date}, Integer: ${todaysData.integer}`;
+          document.getElementById('output').innerHTML = output;
+        } else {
+          document.getElementById('output').innerHTML = 'No data found for today\'s date.';
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching or parsing CSV data:', error);
+        document.getElementById('output').innerHTML = 'Error fetching or parsing CSV data.';
       });
-      return obj;
-    });
-
-    const todaysData = data.find(row => row.date === today);
-
-    if (todaysData) {
-      const output = `Today's date: ${todaysData.date}, Integer: ${todaysData.integer}`;
-      document.body.innerHTML += `<p>${output}</p>`;
-    } else {
-      document.body.innerHTML += `<p>No data found for today's date.</p>`;
-    }
-  })
-  .catch(error => {
-    console.error('Error fetching or parsing CSV data:', error);
-    document.body.innerHTML += `<p>Error fetching or parsing CSV data.</p>`;
-  });    </script>
+  </script>
 </body>
 </html>
