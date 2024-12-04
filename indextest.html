@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!-- This code was developed using Developer Tools AI assistance in Chrome with prompts from Mr. EkerÖ 
+
+Leased car with a 3-year contract. Start date: 14/10/2024. According to the contract,
+a maximum of 30,000 kilometers is allowed during the entire leasing period. 
+This website helps me keep track of how far I should have driven up to today's 
+date to not exceed the agreed 30,000 kilometers over 3 years.
+-->
+
+<html>
+<head>
+  <title>The permitted mileage for today's date</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center; 
+      align-items: center;    
+      color: white;
+      background-color: black; 
+    }
+    .centered-text {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="centered-text">
+    <p style="font-size: 12px;">
+      Leasingbil uttagen 14 oktober 2024.<br>
+      Max körsträcka på 3 år: 3000 mil
+    </p>   
+    <p>Rekommenderad körsträcka<br>fram till dagens datum</p>
+    <div id="output"></div>
+  </div>
+
+  <script>
+    const startDate = new Date('2024-10-13');
+    const endDate = new Date(startDate);
+    endDate.setFullYear(endDate.getFullYear() + 3);
+
+    const data = [];
+    const totalDays = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24));
+    const integerIncrement = 3000 / totalDays;
+
+    for (let i = 0; i <= totalDays; i++) {
+      const currentDate = new Date(startDate);
+      currentDate.setDate(currentDate.getDate() + i);
+      const dateStr = currentDate.toISOString().slice(0, 10);
+      const integer = (integerIncrement * i).toFixed(2);
+      data.push({ date: dateStr, integer: parseFloat(integer) });
+    }
+
+    const today = new Date().toISOString().slice(0, 10);
+    const todaysData = data.find(row => row.date === today);
+
+    if (todaysData) {
+      const output = `${todaysData.date}<br>${todaysData.integer} mil`;
+      document.getElementById('output').innerHTML = output;
+    } else {
+      document.getElementById('output').innerHTML = 'No data found for today\'s date.';
+    }
+  </script>
+</body>
+</html>
