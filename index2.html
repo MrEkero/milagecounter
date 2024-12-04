@@ -36,36 +36,7 @@ date to not exceed the agreed 30,000 kilometers over 3 years.
    
   <p>Rekommenderad körsträcka<br>fram till dagens datum</p>
   <div id="output"></div>
-
-  <script>
-  const startDate = new Date('2024-10-13');
-  const endDate = new Date(startDate);
-  endDate.setFullYear(endDate.getFullYear() + 3);
-
-  const data = [];
-  const totalDays = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24));
-  const integerIncrement = 3000 / totalDays;
-
-  for (let i = 0; i <= totalDays; i++) {
-    const currentDate = new Date(startDate);
-    currentDate.setDate(currentDate.getDate() + i);
-    const dateStr = currentDate.toISOString().slice(0, 10);
-    const integer = (integerIncrement * i).toFixed(2);
-    data.push({ date: dateStr, integer: parseFloat(integer) });
-  }
-
-  const today = new Date().toISOString().slice(0, 10);
-  const todaysData = data.find(row => row.date === today);
-
-  if (todaysData) {
-    const output = `${todaysData.date}<br>${todaysData.integer} mil`;
-    document.getElementById('output').innerHTML = output;
-  } else {
-    document.getElementById('output').innerHTML = 'No data found for today\'s date.';
-  }
-
-
-// Add an input field for the start date
+     // Add an input field for the start date
 const startDateInput = document.createElement('input');
 startDateInput.type = 'date';
 startDateInput.id = 'startDate';
@@ -102,6 +73,36 @@ script.textContent = `
   // Trigger the calculation initially
   startDateInput.dispatchEvent(new Event('change'));
 `;
+
+  <script>
+  const startDate = new Date('2024-10-13');
+  const endDate = new Date(startDate);
+  endDate.setFullYear(endDate.getFullYear() + 3);
+
+  const data = [];
+  const totalDays = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24));
+  const integerIncrement = 3000 / totalDays;
+
+  for (let i = 0; i <= totalDays; i++) {
+    const currentDate = new Date(startDate);
+    currentDate.setDate(currentDate.getDate() + i);
+    const dateStr = currentDate.toISOString().slice(0, 10);
+    const integer = (integerIncrement * i).toFixed(2);
+    data.push({ date: dateStr, integer: parseFloat(integer) });
+  }
+
+  const today = new Date().toISOString().slice(0, 10);
+  const todaysData = data.find(row => row.date === today);
+
+  if (todaysData) {
+    const output = `${todaysData.date}<br>${todaysData.integer} mil`;
+    document.getElementById('output').innerHTML = output;
+  } else {
+    document.getElementById('output').innerHTML = 'No data found for today\'s date.';
+  }
+
+
+
    
 </script>
      </div>
