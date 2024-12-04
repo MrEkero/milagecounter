@@ -63,6 +63,46 @@ date to not exceed the agreed 30,000 kilometers over 3 years.
   } else {
     document.getElementById('output').innerHTML = 'No data found for today\'s date.';
   }
+
+
+// Add an input field for the start date
+const startDateInput = document.createElement('input');
+startDateInput.type = 'date';
+startDateInput.id = 'startDate';
+startDateInput.value = '2024-10-14'; // Default value
+
+// Add a label for the input field
+const startDateLabel = document.createElement('label');
+startDateLabel.htmlFor = 'startDate';
+startDateLabel.textContent = 'Start Date:';
+
+// Insert the input field and label before the output div
+const outputDiv = document.getElementById('output');
+outputDiv.parentNode.insertBefore(startDateLabel, outputDiv);
+outputDiv.parentNode.insertBefore(startDateInput, outputDiv);
+
+// Update the calculation logic to use the new start date
+const script = document.querySelector('script');
+script.textContent = `
+  const startDateInput = document.getElementById('startDate');
+  const outputDiv = document.getElementById('output');
+
+  startDateInput.addEventListener('change', () => {
+    const startDate = new Date(startDateInput.value);
+    const today = new Date();
+    const timeDiff = today.getTime() - startDate.getTime();
+    const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    const totalDays = 3 * 365; // 3 years
+    const kmPerDay = 30000 / totalDays;
+    const expectedKm = Math.round(kmPerDay * daysDiff);
+
+    outputDiv.textContent = 'Expected kilometers driven: ' + expectedKm;
+  });
+
+  // Trigger the calculation initially
+  startDateInput.dispatchEvent(new Event('change'));
+`;
+   
 </script>
      </div>
     </font>
