@@ -36,6 +36,10 @@ date to not exceed the agreed 30,000 kilometers over 3 years.
    
   <p>Rekommenderad körsträcka<br>fram till dagens datum</p>
   <div id="output"></div>
+
+
+  <script>
+
      // Add an input field for the start date
 const startDateInput = document.createElement('input');
 startDateInput.type = 'date';
@@ -73,8 +77,6 @@ script.textContent = `
   // Trigger the calculation initially
   startDateInput.dispatchEvent(new Event('change'));
 `;
-
-  <script>
   const startDate = new Date('2024-10-13');
   const endDate = new Date(startDate);
   endDate.setFullYear(endDate.getFullYear() + 3);
