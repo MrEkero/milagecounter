@@ -58,7 +58,7 @@ date to not exceed the agreed 30,000 kilometers over 3 years.
 
     if (todaysData) {
 
-      const output = `<span style="color: white; font-size: 20px;">Rekommenderad körsträcka fram till ${todaysData.date}</span><br><span style="color: red; font-size: 58px;">${todaysData.integer} mil</span>`;
+      const output = `<span style="color: white; font-size: 20px;">Rekommenderad körsträcka fram till ${todaysData.date}</span><br><span style="color: yellow; font-size: 58px;">${todaysData.integer} mil</span>`;
       document.getElementById('output').innerHTML = output;
     } else {
       document.getElementById('output').innerHTML = 'No data found for today\'s date.';
