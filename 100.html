@@ -70,9 +70,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   let tableVisible = true;
 	
-tableContainer.style.display = 'block';
-    
-
   toggleButton.addEventListener('click', (event) => {
     event.stopPropagation();
 
@@ -89,6 +86,22 @@ tableContainer.style.display = 'block';
 window.addEventListener('load', () => {
   const table = document.querySelector('table');
   table.classList.add('hidden-table');
+});
+
+
+	  document.addEventListener('DOMContentLoaded', function() {
+  const toggleButton = document.getElementById('toggle-button');
+  const tableContainer = document.getElementById('full-table').parentElement;
+
+  // Hide the table initially
+  tableContainer.style.display = 'none';
+
+  toggleButton.addEventListener('click', (event) => {
+    event.stopPropagation();
+
+    // Toggle the display property
+    tableContainer.style.display = tableContainer.style.display === 'none' ? 'block' : 'none';
+  });
 });
 	  
   </script>
