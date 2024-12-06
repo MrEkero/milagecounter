@@ -68,7 +68,10 @@ document.addEventListener('DOMContentLoaded', function() {
   const toggleButton = document.getElementById('toggle-button');
   const tableContainer = document.getElementById('full-table').parentElement; // Select table's parent using ID
 
-  let tableVisible = false;
+  let tableVisible = true;
+	
+tableContainer.style.display = 'block';
+    
 
   toggleButton.addEventListener('click', (event) => {
     event.stopPropagation();
