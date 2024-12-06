@@ -65,5 +65,15 @@ date to not exceed the agreed 30,000 kilometers over 3 years.
       document.getElementById('output').innerHTML = 'No data found for today\'s date.';
     }
   </script>
+
+  const button = document.createElement('button');
+button.textContent = 'Open CSV';
+button.addEventListener('click', () => {
+  const link = document.createElement('a');
+  link.href = 'https://ekeron.com/lease_distance_tracker_nordic_miles.csv';
+  link.target = '_blank';
+  link.click();
+});
+$0.appendChild(button);
 </body>
 </html>
