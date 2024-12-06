@@ -115,9 +115,46 @@ window.addEventListener('load', () => {
     tableContainer.style.display = tableContainer.style.display === 'none' ? 'block' : 'none';
   });
 });
+
+
+
+
+
+
+
+
+
+
+
+const table = document.querySelector('table#full-table');
+if (!table) {
+  throw new Error('Table not found.');
+}
+
+const startDate = new Date('2024-11-01');
+const numRows = 1094; // Total number of rows
+
+let tableHTML = '';
+for (let i = 0; i < numRows; i++) {
+  const currentDate = new Date(startDate);
+  currentDate.setDate(startDate.getDate() + i);
+  const dateString = currentDate.toISOString().slice(0, 10);
+  const number = (i + 1) * 2.74;
+
+  tableHTML += `<tr><td>${dateString}</td><td>${number}</td></tr>`;
+}
+
+table.innerHTML = tableHTML;
+
+	  
 	  
   </script>
 
+	<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Your optimized table generation code here
+  });
+</script>
 
 <div style="overflow-y: scroll; max-height: 300px; display: block;">
 
