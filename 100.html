@@ -1,3 +1,4 @@
+
 <html><head>
   <title>The permitted mileage for today's date</title>
   <style>
@@ -23,11 +24,23 @@
       
   </style>
   
+  
+  
+      <style>
+        #toggle-button {
+            display: none; /* Hide the button */
+        }
+        #image-button {
+            cursor: pointer; /* Makes the image look clickable */
+        }
+    </style>
+  
 </head>
 <body>
   <div class="centered-text" style="display: block;">
-  <button id="toggle-button" style="display: block; margin-bottom: 10px;">X</button>
-  <img src=".\bmw.png" alt="bmw">
+ 
+	<button id="toggle-button" style="display: none; margin-bottom: ;"></button>
+      <img id="image-button" src=".\bmw.png"  alt="Image Button" style="display: block; margin-bottom: 10px;">
     <p style="font-size: 12px;">
       Leasingbil uttagen 1 november 2024.<br>
       Max körsträcka på 3 år: 3000 mil
@@ -83,6 +96,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+
+
+
+
+        document.getElementById('image-button').addEventListener('click', function() {
+            document.getElementById('toggle-button').click();
+        });
 	
   </script>
 
