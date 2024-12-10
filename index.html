@@ -55,11 +55,15 @@ date to not exceed the agreed 30,000 kilometers over 3 years.
       font-weight: bold;
       color: #d9534f;
     }
-	.highlightMILE {
+    .highlightMILE {
       font-weight: bold;
-	  font-family: "Copperplate", "Copperplate Gothic Light", "Copperplate Gothic Bold", sans-serif;
+      font-family: "Copperplate", "Copperplate Gothic Light", "Copperplate Gothic Bold", sans-serif;
       color: #d9534f;
-	  font-size: 54px;
+      font-size: 54px;
+    }
+    .highlight-column {
+      background-color: #d9534f;
+      color: black;
     }
     .toggle-button {
       display: block;
@@ -75,31 +79,30 @@ date to not exceed the agreed 30,000 kilometers over 3 years.
     #table-container {
       display: none; /* Table is hidden initially */
     }
-
   </style>
 </head>
 <body>
-	<center>
-	  <div>
-    <div class="toggle-button">
-      <img id="toggle-table" src="./bmw.png" alt="Toggle Table" title="Visa/Dölj Tabell">
+  <center>
+    <div>
+      <div class="toggle-button">
+        <img id="toggle-table" src="./bmw.png" alt="Toggle Table" title="Visa/Dölj Tabell">
+      </div>
     </div>
-  </div>
-	<p>Leasingbil uttagen 1 november 2024.<br>
-Max körsträcka på 3 år: 3000 mil</p></center>
+    <p>Leasingbil uttagen 1 november 2024.<br>
+    Max körsträcka på 3 år: 3000 mil</p>
+  </center>
   <div id="todays-info" class="todays-info"></div>
 
-
-<div id="table-container" style="
-  overflow-y: scroll; 
-  max-height: 300px; 
-  max-width: 800px; 
-  margin: 0 auto; 
-  display: flex; 
-  justify-content: center; 
-  align-items: center;
-   display: none;
-"></div>
+  <div id="table-container" style="
+    overflow-y: scroll; 
+    max-height: 300px; 
+    max-width: 800px; 
+    margin: 0 auto; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    display: none;
+  "></div>
 
   <script>
     // Define start and end dates
@@ -127,7 +130,9 @@ Max körsträcka på 3 år: 3000 mil</p></center>
     // Display today's date and Antalmil
     if (todaysData) {
       document.getElementById('todays-info').innerHTML = `
-        Rekommenderad max körsträcka<br> fram till idag <span class="highlight">${todaysData.Datum}</span><br><span class="highlightMILE">${todaysData.Antalmil} mil</span>
+        Rekommenderad max körsträcka<br> fram till idag 
+        <span class="highlight">${todaysData.Datum}</span><br>
+        <span class="highlightMILE">${todaysData.Antalmil} mil</span>
       `;
     } else {
       document.getElementById('todays-info').innerHTML = `
@@ -143,8 +148,8 @@ Max körsträcka på 3 år: 3000 mil</p></center>
     data.forEach(row => {
       tableHTML += `
         <tr>
-          <td>${row.Datum}</td>
-          <td>${row.Antalmil}</td>
+          <td class="${row.Datum === today ? 'highlight-column' : ''}">${row.Datum}</td>
+          <td class="${row.Datum === today ? 'highlight-column' : ''}">${row.Antalmil}</td>
         </tr>`;
     });
 
