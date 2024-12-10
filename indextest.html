@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<!-- 2024 december - This code was developed using OpenAI chatgpt with prompts and some adjustments from Mr.EkerÖ -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The permitted mileage for today's date</title>
+  <title>The Permitted Mileage for Today's Date</title>
   <style>
     body {
       font-family: "Copperplate", "Copperplate Gothic Light", "Copperplate Gothic Bold", sans-serif;
@@ -25,14 +24,14 @@
       text-align: center;
     }
     th {
-      background-color: #000000;
-      color: white;
+      background-color: #d9534f;
+      color: black;
     }
     tr:nth-child(even) {
       background-color: #000000;
     }
     tr:nth-child(odd) {
-      background-color: #000000;
+      background-color: #222222;
     }
     h1, h2 {
       color: #007BFF;
@@ -76,9 +75,6 @@
       max-height: 300px;
       max-width: 800px;
       margin: 0 auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
 
     /* Scrollbar Styling */
@@ -117,7 +113,7 @@
 
   <script>
     // Define start and end dates
-    const startDate = new Date('2024-10-31');
+    const startDate = new Date('2024-11-01');
     const endDate = new Date(startDate);
     endDate.setFullYear(endDate.getFullYear() + 3);
 
@@ -154,6 +150,12 @@
     // Create HTML table
     let tableHTML = `
       <table>
+        <thead>
+          <tr>
+            <th>Datum</th>
+            <th>Körda Mil</th>
+          </tr>
+        </thead>
         <tbody>`;
 
     data.forEach(row => {
