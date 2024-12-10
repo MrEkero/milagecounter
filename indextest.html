@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<!-- 2024 December - This code was developed using OpenAI chatgpt with prompts and some adjustments from Mr.EkerÖ 
+https://openai.com/ 
+https://chatgpt.com/
+
+Leased car with a 3-year contract. Start date: 01/11/2024. According to the contract,
+a maximum of 30,000 kilometers is allowed during the entire leasing period. 
+This website helps me keep track of how far I should have driven up to today's 
+date to not exceed the agreed 30,000 kilometers over 3 years.
+-->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -24,14 +33,14 @@
       text-align: center;
     }
     th {
-      background-color: #d9534f;
-      color: black;
+      background-color: #000000;
+      color: white;
     }
     tr:nth-child(even) {
-      background-color: #000000;
+      background-color: #222222; /* Dark gray for even rows */
     }
     tr:nth-child(odd) {
-      background-color: #222222;
+      background-color: #000000; /* Black for odd rows */
     }
     h1, h2 {
       color: #007BFF;
@@ -71,9 +80,9 @@
     }
     #table-container {
       display: none; /* Table is hidden initially */
-      overflow-y: scroll;
-      max-height: 300px;
-      max-width: 800px;
+      overflow-y: scroll; 
+      max-height: 300px; 
+      max-width: 800px; 
       margin: 0 auto;
     }
 
@@ -113,7 +122,7 @@
 
   <script>
     // Define start and end dates
-    const startDate = new Date('2024-11-01');
+    const startDate = new Date('2024-10-31');
     const endDate = new Date(startDate);
     endDate.setFullYear(endDate.getFullYear() + 3);
 
@@ -150,12 +159,6 @@
     // Create HTML table
     let tableHTML = `
       <table>
-        <thead>
-          <tr>
-            <th>Datum</th>
-            <th>Körda Mil</th>
-          </tr>
-        </thead>
         <tbody>`;
 
     data.forEach(row => {
