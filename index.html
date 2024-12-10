@@ -168,6 +168,17 @@ date to not exceed the agreed 30,000 kilometers over 3 years.
     toggleButton.addEventListener('click', () => {
       tableContainer.style.display = tableContainer.style.display === 'none' ? 'block' : 'none';
     });
+
+    // Scroll to today's row when the table is shown
+    toggleButton.addEventListener('click', () => {
+      if (tableContainer.style.display === 'block') {
+        const todayRow = Array.from(tableContainer.querySelectorAll('tr')).find(row =>
+          row.querySelector('td').textContent === today);
+        if (todayRow) {
+          todayRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    });
   </script>
 </body>
 </html>
