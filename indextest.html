@@ -1,44 +1,123 @@
 <!DOCTYPE html>
-<!-- This code was developed using Developer Tools AI assistance in Chrome with prompts from Mr. EkerÖ 
-
-Leased car with a 3-year contract. Start date: 14/10/2024. According to the contract,
-a maximum of 30,000 kilometers is allowed during the entire leasing period. 
-This website helps me keep track of how far I should have driven up to today's 
-date to not exceed the agreed 30,000 kilometers over 3 years.
--->
-
-<html>
+<!-- 2024 december - This code was developed using OpenAI chatgpt with prompts and some adjustments from Mr.EkerÖ -->
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The permitted mileage for today's date</title>
   <style>
-    body, html {
-      height: 100%;
-      margin: 0;
-      display: flex;
-      justify-content: center; 
-      align-items: center;    
-      color: white;
-      background-color: black; 
-      font-size: 44px;
+    body {
       font-family: "Copperplate", "Copperplate Gothic Light", "Copperplate Gothic Bold", sans-serif;
+      margin: 20px;
+      background-color: #000000;
+      color: white;
     }
-    .centered-text {
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #d9534f;
+    }
+    th, td {
+      padding: 10px;
       text-align: center;
+    }
+    th {
+      background-color: #000000;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #000000;
+    }
+    tr:nth-child(odd) {
+      background-color: #000000;
+    }
+    h1, h2 {
+      color: #007BFF;
+      text-align: center;
+    }
+    .todays-info {
+      font-size: 18px;
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      color: white;
+    }
+    .highlight {
+      font-weight: bold;
+      color: #d9534f;
+    }
+    .highlightMILE {
+      font-weight: bold;
+      font-family: "Copperplate", "Copperplate Gothic Light", "Copperplate Gothic Bold", sans-serif;
+      color: #d9534f;
+      font-size: 54px;
+    }
+    .highlight-column {
+      background-color: #d9534f;
+      color: black;
+    }
+    .toggle-button {
+      display: block;
+      margin: 20px auto;
+      width: 298px;
+      height: 130px;
+      cursor: pointer;
+    }
+    .toggle-button img {
+      width: 100%;
+      height: auto;
+    }
+    #table-container {
+      display: none; /* Table is hidden initially */
+      overflow-y: scroll;
+      max-height: 300px;
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #000000; /* Background color of the track */
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #d9534f; /* Thumb color */
+      border-radius: 10px; /* Rounded edges */
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #c9302c; /* Darker shade on hover */
+    }
+    html {
+      scrollbar-width: thin; /* Thin scrollbar for Firefox */
+      scrollbar-color: #d9534f #000000; /* Thumb color and track color for Firefox */
     }
   </style>
 </head>
 <body>
-  <div class="centered-text">
-<img src=".\bmw.png" alt="bmw">
-    <p style="font-size: 12px;">
-      Leasingbil uttagen 14 oktober 2024.<br>
-      Max körsträcka på 3 år: 3000 mil
-    </p>   
-    <div id="output"></div>
-  </div>
+  <center>
+    <div>
+      <div class="toggle-button">
+        <img id="toggle-table" src="./bmw.png" alt="Toggle Table" title="Visa/Dölj Tabell">
+      </div>
+    </div>
+    <p>Leasingbil uttagen 1 november 2024.<br>
+    Max körsträcka på 3 år: 3000 mil</p>
+  </center>
+  <div id="todays-info" class="todays-info"></div>
+
+  <div id="table-container"></div>
 
   <script>
-    const startDate = new Date('2024-10-13');
+    // Define start and end dates
+    const startDate = new Date('2024-10-31');
     const endDate = new Date(startDate);
     endDate.setFullYear(endDate.getFullYear() + 3);
 
@@ -46,52 +125,69 @@ date to not exceed the agreed 30,000 kilometers over 3 years.
     const totalDays = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24));
     const integerIncrement = 3000 / totalDays;
 
+    // Generate data table
     for (let i = 0; i <= totalDays; i++) {
       const currentDate = new Date(startDate);
       currentDate.setDate(currentDate.getDate() + i);
-      const dateStr = currentDate.toISOString().slice(0, 10);
-      const integer = (integerIncrement * i).toFixed(2);
-      data.push({ date: dateStr, integer: parseFloat(integer) });
+      const datum = currentDate.toISOString().slice(0, 10);
+      const antalmil = (integerIncrement * i).toFixed(2);
+      data.push({ Datum: datum, Antalmil: parseFloat(antalmil) });
     }
 
+    // Find today's data
     const today = new Date().toISOString().slice(0, 10);
-    const todaysData = data.find(row => row.date === today);
+    const todaysData = data.find(row => row.Datum === today);
 
+    // Display today's date and Antalmil
     if (todaysData) {
-
-      const output = `<p style="color: white; font-size: 20px;">Rekommenderad körsträcka<br>fram till ${todaysData.date}</span><br><span style="color: red; font-size: 58px;">${todaysData.integer} mil</p>`;
-      document.getElementById('output').innerHTML = output;
+      document.getElementById('todays-info').innerHTML = `
+        Rekommenderad max körsträcka<br> fram till idag 
+        <span class="highlight">${todaysData.Datum}</span><br>
+        <span class="highlightMILE">${todaysData.Antalmil} mil</span>
+      `;
     } else {
-      document.getElementById('output').innerHTML = 'No data found for today\'s date.';
+      document.getElementById('todays-info').innerHTML = `
+        Idag är det <span class="highlight">${today}</span>, men det finns ingen data för detta datum.
+      `;
     }
 
-const table = document.createElement('table');
-const headerRow = table.insertRow();
-headerRow.insertCell().textContent = 'Column 1';
-headerRow.insertCell().textContent = 'Column 2';
-document.body.appendChild(table);
+    // Create HTML table
+    let tableHTML = `
+      <table>
+        <tbody>`;
 
-const button = document.createElement('button');
-button.textContent = 'Import CSV';
-button.addEventListener('click', async () => {
-  const response = await fetch('https://ekeron.com/lease_distance_tracker_nordic_miles.csv');
-  const csvData = await response.text();
-  const rows = csvData.split('\n').slice(1); // Skip header row
-  rows.forEach(row => {
-    const cells = row.split(',');
-    const tableRow = table.insertRow();
-    tableRow.insertCell().textContent = cells[0];
-    tableRow.insertCell().textContent = cells[1];
-  });
-});
-document.body.appendChild(button);
+    data.forEach(row => {
+      tableHTML += `
+        <tr>
+          <td class="${row.Datum === today ? 'highlight-column' : ''}">${row.Datum}</td>
+          <td class="${row.Datum === today ? 'highlight-column' : ''}">${row.Antalmil}</td>
+        </tr>`;
+    });
 
-const data = {
-  hasTable: !!document.querySelector('table'),
-  hasButton: !!document.querySelector('button'),
-};
+    tableHTML += `
+        </tbody>
+      </table>`;
+
+    // Insert the table into the HTML
+    document.getElementById('table-container').innerHTML = tableHTML;
+
+    // Toggle table visibility
+    const tableContainer = document.getElementById('table-container');
+    const toggleButton = document.getElementById('toggle-table');
+    toggleButton.addEventListener('click', () => {
+      tableContainer.style.display = tableContainer.style.display === 'none' ? 'block' : 'none';
+    });
+
+    // Scroll to today's row when the table is shown
+    toggleButton.addEventListener('click', () => {
+      if (tableContainer.style.display === 'block') {
+        const todayRow = Array.from(tableContainer.querySelectorAll('tr')).find(row =>
+          row.querySelector('td').textContent === today);
+        if (todayRow) {
+          todayRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    });
   </script>
-
-
 </body>
 </html>
