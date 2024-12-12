@@ -177,13 +177,9 @@ function setCookie(name, value, days) {
     }
 
 function calculateAntalmil(dayIndex) {
-  if (dayIndex === totalDays - 1) {
-    // For the last day, calculate to ensure it doesn't exceed the total distance
-    return Math.round(initialDistance - (integerIncrement * dayIndex));
-  }
-  // For all other days, start with +1
-  return Math.round(integerIncrement * (dayIndex + 1));
-}
+    function calculateAntalmil(dayIndex) {
+      return Math.round(integerIncrement * (dayIndex +1));
+    }
 
 
 
