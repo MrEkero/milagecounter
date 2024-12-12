@@ -146,10 +146,11 @@ driven up to today's date to not exceed the agreed 30,000 kilometers over 3 year
   <div id="table-container" style="overflow-y: scroll; max-height: 300px; max-width: 800px; margin: 0 auto; display: flex; justify-content: center; align-items: center; display: none;"></div>
 
   <script>
-    function setCookie(name, value, days) {
-      const expires = new Date(Date.now() + days * 86400000).toUTCString();
-      document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
-    }
+function setCookie(name, value, days) {
+  const expires = new Date(Date.now() + days * 86400000).toUTCString();
+  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
+}
+
 
     function getCookie(name) {
       const cookies = document.cookie.split('; ');
@@ -226,9 +227,9 @@ driven up to today's date to not exceed the agreed 30,000 kilometers over 3 year
       const endDateInput = document.getElementById('end-date').value;
       const distanceInput = document.getElementById('distance').value;
 
-      setCookie('startDate', startDateInput, 30);
-      setCookie('endDate', endDateInput, 30);
-      setCookie('distance', distanceInput, 30);
+setCookie('startDate', startDateInput, 3650);
+setCookie('endDate', endDateInput, 3650);
+setCookie('distance', distanceInput, 3650);
 
       const output = `Leasingbil uttagen: ${startDateInput}\nÅterlämnas: ${endDateInput}\nMax körsträcka för perioden: ${distanceInput} mil`;
       document.getElementById('output').innerText = output;
