@@ -176,7 +176,7 @@ function setCookie(name, value, days) {
     }
 
     function calculateAntalmil(dayIndex) {
-      return (integerIncrement * (dayIndex +1)).toFixed(2);
+      return Math.round(integerIncrement * (dayIndex +1));
     }
 
     function generateData() {
