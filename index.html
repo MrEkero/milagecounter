@@ -176,12 +176,9 @@ function setCookie(name, value, days) {
       integerIncrement = initialDistance / totalDays;
     }
 
-function calculateAntalmil(dayIndex) {
     function calculateAntalmil(dayIndex) {
       return Math.round(integerIncrement * (dayIndex +1));
     }
-
-
 
     function generateData() {
       calculateTotalDaysAndIncrement();
