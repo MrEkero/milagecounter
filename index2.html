@@ -1,0 +1,290 @@
+
+<!-- This code was developed with the assistance of OpenAI ChatGPT, prompts and enhancements provided by Mr.EkerÖ.
+
+Leased car with a 3-year contract. Start date: 1/11/2024. According to the contract,
+a maximum of 30,000 kilometers is allowed during the entire leasing period. 
+This website helps me keep track of the recommended maximum distance I should have
+driven up to today's date to not exceed the agreed 30,000 kilometers over 3 years.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The permitted mileage for today's date</title>
+  <style>
+    body {
+      font-family: "Copperplate", "Copperplate Gothic Light", "Copperplate Gothic Bold", sans-serif;
+      margin: 20px;
+      background-color: #000000;
+      color: white;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #d9534f;
+    }
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #000000;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #000000;
+    }
+    tr:nth-child(odd) {
+      background-color: #000000;
+    }
+    h1, h2 {
+      color: #007BFF;
+      text-align: center;
+    }
+    .todays-info {
+      font-size: 18px;
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      color: white;
+    }
+    .highlight {
+      font-weight: bold;
+      color: #d9534f;
+    }
+    .highlightMILE {
+      font-weight: bold;
+      font-family: "Copperplate", "Copperplate Gothic Light", "Copperplate Gothic Bold", sans-serif;
+      color: #d9534f;
+      font-size: 54px;
+    }
+    .highlight-column {
+      background-color: #d9534f;
+      color: black;
+    }
+    .toggle-button {
+      display: block;
+      margin: 20px auto;
+      width: 298px;
+      height: 130px;
+      cursor: pointer;
+    }
+    .toggle-button img {
+      width: 100%;
+      height: auto;
+    }
+    #table-container, #input-container {
+      display: none;
+    }
+
+    .input-boxes {
+      display: flex;
+      justify-content: flex-start;
+      gap: 5px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .input-boxes label {
+      display: inline-block;
+      margin-right: 0px;
+      color: white;
+    }
+
+    .input-boxes input {
+      flex: 1;
+      padding: 5px;
+      width: 105px;
+    }
+
+    #update-btn {
+      padding: 5px;
+      background-color: #d9534f;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    #output {
+      margin-top: 20px;
+      color: white;
+      white-space: pre-wrap; /* Preserve line breaks */
+    }
+  </style>
+</head>
+<body>
+  <center>
+    <div>
+      <div class="toggle-button">
+        <img id="toggle-table" src="./bmw.png" alt="Toggle Table" title="Visa/Dölj inställningar">
+      </div>
+    </div>
+  </center>
+
+  <center>
+    <div id="output"></div>
+      <div id="todays-info" class="todays-info"></div>
+    <div id="input-container" class="input-boxes">
+      <label for="start-date">Start:</label>
+      <input type="date" id="start-date" placeholder="Start Date" value="2024-11-01">
+
+      <label for="end-date">Slut:</label>
+      <input type="date" id="end-date" placeholder="End Date" value="2027-11-01">
+<br>
+      <label for="distance">Mil:</label>
+      <input type="number" id="distance" placeholder="Max Distance (miles)" value="3000">
+    
+      <button id="update-btn">Update</button>
+    </div>
+  </center>
+
+  <div id="todays-info" class="todays-info"></div>
+  <div id="table-container" style="overflow-y: scroll; max-height: 300px; max-width: 800px; margin: 0 auto; display: flex; justify-content: center; align-items: center; display: none;"></div>
+
+  <script>
+function setCookie(name, value, days) {
+  const expires = new Date(Date.now() + days * 86400000).toUTCString();
+  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
+}
+
+
+    function getCookie(name) {
+      const cookies = document.cookie.split('; ');
+      for (let cookie of cookies) {
+        const [key, value] = cookie.split('=');
+        if (key === name) return decodeURIComponent(value);
+      }
+      return null;
+    }
+
+    let startDate = new Date('2024-10-31');
+    let endDate = new Date(startDate);
+    endDate.setFullYear(endDate.getFullYear() + 3);
+    let initialDistance = 3000;
+
+    let data = [];
+    let totalDays = 0;
+    let integerIncrement = 0;
+
+    function calculateTotalDaysAndIncrement() {
+      totalDays = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24));
+      integerIncrement = initialDistance / totalDays;
+    }
+
+   function calculateAntalmil(dayIndex) {
+  if (dayIndex === totalDays) {
+    // For the last day, subtract 1 to ensure we don't exceed the mileage
+    return Math.round(integerIncrement * (dayIndex));
+  }
+  // For all other days, start with +1
+  return Math.round(integerIncrement * (dayIndex + 1));
+}
+
+
+    function generateData() {
+      calculateTotalDaysAndIncrement();
+      data = [];
+      for (let i = 0; i <= totalDays; i++) {
+        const currentDate = new Date(startDate);
+        currentDate.setDate(currentDate.getDate() + i);
+        const datum = currentDate.toISOString().slice(0, 10);
+        const antalmil = calculateAntalmil(i);
+        data.push({ Datum: datum, Antalmil: parseFloat(antalmil) });
+      }
+
+      const today = new Date().toISOString().slice(0, 10);
+      const todaysData = data.find(row => row.Datum === today);
+
+      if (todaysData) {
+        document.getElementById('todays-info').innerHTML = `
+          Rekommenderad max körsträcka<br> fram till idag 
+          <span class="highlight">${todaysData.Datum}</span><br>
+          <span class="highlightMILE">${todaysData.Antalmil} mil</span><br>
+        `;
+      } else {
+        document.getElementById('todays-info').innerHTML = `
+          Idag är det <span class="highlight">${today}</span>, men det finns ingen data för detta datum.
+        `;
+      }
+
+      let tableHTML = `<table><tbody>`;
+      data.forEach(row => {
+        tableHTML += `
+          <tr>
+            <td class="${row.Datum === today ? 'highlight-column' : ''}" id="${row.Datum}">${row.Datum}</td>
+            <td class="${row.Datum === today ? 'highlight-column' : ''}">${row.Antalmil}</td>
+          </tr>`;
+      });
+      tableHTML += `</tbody></table>`;
+      document.getElementById('table-container').innerHTML = tableHTML;
+
+      const todaysRow = document.getElementById(today);
+      if (todaysRow) {
+        todaysRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    function updateOutput() {
+      const startDateInput = document.getElementById('start-date').value;
+      const endDateInput = document.getElementById('end-date').value;
+      const distanceInput = document.getElementById('distance').value;
+
+setCookie('startDate', startDateInput, 3650);
+setCookie('endDate', endDateInput, 3650);
+setCookie('distance', distanceInput, 3650);
+
+      const output = `Leasingbil uttagen: ${startDateInput}\nÅterlämnas: ${endDateInput}\nMax körsträcka för perioden: ${distanceInput} mil`;
+      document.getElementById('output').innerText = output;
+    }
+
+    window.onload = () => {
+      const savedStartDate = getCookie('startDate');
+      const savedEndDate = getCookie('endDate');
+      const savedDistance = getCookie('distance');
+
+      if (savedStartDate) document.getElementById('start-date').value = savedStartDate;
+      if (savedEndDate) document.getElementById('end-date').value = savedEndDate;
+      if (savedDistance) document.getElementById('distance').value = savedDistance;
+
+      updateOutput();
+      generateData();
+
+      document.getElementById('update-btn').click();
+    };
+
+    const tableContainer = document.getElementById('table-container');
+    const inputContainer = document.getElementById('input-container');
+    const toggleButton = document.getElementById('toggle-table');
+    toggleButton.addEventListener('click', () => {
+      const isHidden = tableContainer.style.display === 'none';
+      tableContainer.style.display = isHidden ? 'block' : 'none';
+      inputContainer.style.display = isHidden ? 'block' : 'none';
+      document.getElementById('update-btn').click();
+    });
+
+    document.getElementById('update-btn').addEventListener('click', () => {
+      const startDateInput = document.getElementById('start-date').value;
+      const endDateInput = document.getElementById('end-date').value;
+      const distanceInput = document.getElementById('distance').value;
+
+      if (startDateInput) startDate = new Date(startDateInput);
+      if (endDateInput) endDate = new Date(endDateInput);
+      if (distanceInput) {
+        const newDistance = parseFloat(distanceInput);
+        if (!isNaN(newDistance)) {
+          initialDistance = newDistance;
+        }
+      }
+
+      document.getElementById('todays-info').style.display = 'block';
+      generateData();
+      updateOutput();
+    });
+  </script>
+</body>
+</html>
