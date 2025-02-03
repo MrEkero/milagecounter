@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TjötGBG</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .chat-container {
+            width: 400px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-header {
+            background: #0077cc;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .chat-box {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            height: 300px;
+        }
+        .chat-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+        .chat-input input {
+            flex-grow: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+        }
+        .chat-input button {
+            background: #0077cc;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">TjötGBG</div>
+        <div class="chat-box" id="chat-box"></div>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Skriv ett meddelande...">
+            <button onclick="sendMessage()">Skicka</button>
+        </div>
+    </div>
+
+    <script>
+        const jokes = [
+            "Vet du varför måsarna bor vid havet? För om de bodde i stan hade de hetat stadsar!",
+            "Vad sa snickaren när han tappade hammaren? Aj, det slog mig just!",
+            "Vet du vad snigeln sa när han satt på en sköldpadda? Woho, vilken fart!",
+            "Vad gör en elektriker när han är arg? Slår av en propp!",
+            "Vet du varför sköldpaddan inte kunde betala notan? För den var pank-sköld!",
+            "Hur mycket väger ett spöke? Exakt ett skräck-ogram!",
+            "Vad sa den ena fisken till den andra? Låt oss dra, vi är omringade!",
+            "Varför tog bakaren med sig en stege? För att nå högre brödgrader!",
+            "Vet du varför cykeln inte kunde stå själv? Den var tvåhjulig!",
+            "Vad sa den ena tomaten till den andra? Skynda dig, annars ketchup!"
+        ];
+
+        function sendMessage() {
+            let inputField = document.getElementById("user-input");
+            let message = inputField.value.trim();
+            if (message !== "") {
+                let chatBox = document.getElementById("chat-box");
+                let userMessage = document.createElement("div");
+                userMessage.textContent = "Du: " + message;
+                chatBox.appendChild(userMessage);
+                
+                let botMessage = document.createElement("div");
+                botMessage.textContent = "TjötGBG: " + jokes[Math.floor(Math.random() * jokes.length)];
+                chatBox.appendChild(botMessage);
+                
+                inputField.value = "";
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
+    </script>
+</body>
+</html>
