@@ -37,16 +37,13 @@
         .message {
             background-color: #e3f7f7;
             border-radius: 10px;
-            padding: 12px;
+            padding: 10px;
             margin-bottom: 10px;
             max-width: 80%;
-            font-size: 18px;
-            color: #0000ff; /* Blå text för alla meddelanden */
         }
         .user-message {
             background-color: #c3e5f7;
             align-self: flex-end;
-            color: #333; /* Standardfärg för användarens inmatning */
         }
         .ai-message {
             background-color: #f7f7f7;
@@ -90,20 +87,139 @@
             <button onclick="getAnswer()">Skicka</button>
         </div>
     </div>
-
+<center>Ingen inmantad information lagras eller skickas till främmande makt</center>
     <script>
         const responses = [
-            "Varför kan en abborre och en mört inte få barn? – För det blir abbört.",
-            "Vad heter Rysslands snabbaste korvstoppare? – Korv-ba´-tjoff.",
-            "Jag kan inte hjälpa dig med just det men jag kan dra en gbg-vits för dig."
+"Varför kan en abborre och en mört inte få barn? – För det blir abbört.",
+"Båtmässan borde slås ihop med MC-mässan och byta namn till? – Skepp O’hoj.",
+"Vad heter Finlands sämsta bärplockare? – Maski Hallonen.",
+"Vad blir det om man lagar bilen på en söndag? – Söndagsbilaga.",
+"Vad heter Rysslands snabbaste korvstoppare? – Korv-ba´-tjoff.",
+"Vad får man om man kapar benen av en gås? – S, eftersom den inte längre kan gå..",
+"4 hundar och 1 dog.",
+"Vad är det där för blandras som du går omkring med? – Jo, jag hade en ångerfull schäfer som försökte göra en pudel.",
+"Vad heter Läderlappens rika kusin? – Tusenlappen.",
+"Staten måste expandera fängelset för att det rymmer för lite.",
+"I Göteborg försöker man förbättra tandhälsan genom att lyssna på äldre kvinnors råd. – Tantråd.",
+"Har du hört om kyrkvaktmästaren med koncentrationssvårigheter? – Han hade grav ADHD.",
+"Vad säger den våldsamma handkrämen till en jobbig människa? – Ska du ha smörj eller?",
+"Varför serverar man sniglar på fina restauranger? – Deras gäster tycker inte om snabbmat!",
+"Vad heter det när två göteborgare skiljer sig? – Päron-Split.",
+"Vad hade Zlatan hetat om han var från Göteborg? – Zlatan Ibrahimordvits.",
+"Jag hade diarré sen gick jag till toaletten och sen var det löst.",
+"Har koncentrationssvårigheterna ökat i Göteborg? – A D H D!",
+"Jag får inte te glöden på grillen! – Du får la änna ringa ett kol-center!",
+"Hur många fakturor har jag blivit av med nu? – Har tappat räkningen igen.",
+"Vilket rockband har energisnålast ljusshow? – LED Zeppelin.",
+"Vilket yrke är mest omväxlande? – Elektriker, det är ju så ohmväxlande!",
+"Vad får man om man solar med BH? – Vitlökar.",
+"Varför är det så svårt att ha en kul utekväll i Riga? – Dom har bara lett-öl.",
+"Du har ju för fan alla bokstavskombinationer… – Ja, förutom I och Q då!",
+"Vad gjorde den pimpelfiskande tjecken när isen frös igen hela tiden? – Han var käck och slo´ vak igen.",
+"En man började studera fåglar på universitetet. – Han är nu Doktor And.",
+"Jag blev sjuk till midsommarafton. – Vilken miss-sommar.",
+"Hörde ni om den skuldsatta dinosaurien? – Levde på krita tydligen.",
+"Vad kallas det när katten missar lådan? – Kissemiss!",
+"Vad kallar man de som kommer fram till ett övergångsställe, trycker på knappen och bara går? – Tryckfelsnissar…",
+"Vem ska man anlita om man vill fräscha upp väggarna? – Ta Peter.",
+"Varför sprider sig de kvinnliga könsorganen så okontrollerat? – Det måste la vara en muttation!",
+"Det var en engelsk kille som skulle gå och klippa sig och då sa han – Are you free sir?",
+"Busschaufförerna har önskemål om toaletter på ändstationerna. – Räcker det inte med hållplatser?",
+"Varför gick det så dåligt för Danmark i EM-kvalet? – Kastrup.",
+"Tomten har slutat röka – Oj då, då blir det inga tomtebloss i år…",
+"När Viktväktarna gör reklam försöker de nå ut till den breda massan.",
+"Vill du ha kaffe får du säga te.",
+"Vilken är Påvens favoritglass? – Romrussin.",
+"Vilken typ av kaffe gillar hamnarbetare? – Bryggkaffe.",
+"Vad kallas hästskon i Göteborg? – Gångjärn.",
+"Vad kallas äldreboenden för män i Spanien? – Señior-boende.",
+"Varför köpa dyra guldfiskar när silverfiskar är helt gratis och otroligt lättskötta?",
+"Smörsångare som sällan åker utomlands? – Inrikes Iglesias.",
+"Vilken gata hör man sämst på i Göteborg? – Vasa-gatan? – Nej, Övre Hursa.",
+"Vad äter en spådam en varm sommardag? – Sia Glass.",
+"Varför gick mjölken ut? – Den blev sur.",
+"Jag är nära släkt med en fågelskrämma. – Den är min halmbror.",
+"Vad kallas de som jobbar extra inom Folktandvården? – Vikaries.",
+"Dom som äter fikon för magens skull kommer ju? – Skita på sig när de upptäcker Microlax.",
+"Efter att man har undertecknat skilsmässopappren får man? – Varsitt ex.",
+"Körde i diket och väntar spänt på bärgningsbilen? – Kan knappt bärga mig.",
+"Vilket är det vanligaste dubbelnamnet i Kenya? – Kenny-Jan.",
+"Hade pengar att placera, startade då en rodeo för att få? – Mycket avkastning.",
+"Vad heter din jycke? – AB+, det är en blodhund.",
+"Vad heter Läderlappens utblottade kusin? – Fattiglappen.",
+"Brittisk radioprogram? – Engelska kanalen.",
+"Kleptomaner bör inte jobba som minröjare? – De kan inte skilja på mina och dina.",
+"Orienterare säger att det är så härligt och fritt ute i naturen, men vafan, det är ju kontroller överallt!",
+"Dom planerar att bygga en lekplats för äldre med fotproblem! – Du skojar, vad ska den lekplatsen heta då? Gikta!",
+"Vad gör The Boss, när han får huvudvärk? – Han tar ju Bruce-tabletter.",
+"Vad sa kannibalen till göteborgaren? – Är du goo eller?",
+"Var lärde hajen sig att simma? – Haj-school.",
+"Arendal och Eriksberg är nedlagda, så nu finns bara Göteborgsvarvet kvar…",
+"Vart kommer du ifrån? – Från Kanada. -Jaha så du kan nada.",
+"Varför heter det vagina och inte barnkanalen?",
+"Vad säger frisören när du kommer på återbesök? – Är du hair igen?",
+"Jag skulle inte säga att jag är bäst i världen på kurragömma, men det är svårt att hitta någon som är bättre.",
+"Varför läcker det från taket i hårsalongen? – De har drop in.",
+"Varför är det bäst att lifta 12.59? – Då kommer bilarna ett i ett.",
+"Vem är den lille pojken med hudsalva i ansiktet? – Det är min korte-son.",
+"Vad kallas en optiker man inte kan lita på? – Ögontjänare.",
+"Varför heter det snutkaffe och inte kaffe-cop?",
+"På grund av de höga elpriserna har Electric Banana Band bytt namn till Acoustic Banana Band.",
+"Vad är det för vatten i vattenpass? – Rakvatten.",
+"Min australiske vän kan verkligen allting om vandringsskor. – Han är en riktig kängguru.",
+"Dom som hjälper folk under pågående vulkanutbrott kan inte ha det lätt. – Nä, det måste vara ett jevla lavarbete!",
+"Vad heter öringynglets mamma och pappa? – Forelldrar.",
+"Häromdagen var jag hos tandläkaren. – Hade inga hål i tänderna men mellan…",
+"Vart är min fönsterskrapa? – Vet inte, den är puts väck.",
+"Vad är det vanligaste dubbelnamnet på manliga bibliotekarier? – Bo Ken.",
+"Vad händer när lakrisen tar slut i Göteborg? – Då blir de La kris!",
+"Visste ni att Dracula hade en kusin som var vegan? – Han hette Ruccola.",
+"På viktväktarnas hemsida frågar de om jag accepterar kakor.– Är det en kuggfråga?",
+"Babben Larsson startade en städfirma.– Svabben Larsson.",
+"När firar bina jul? – Vet inte? – Trettondag jul. Då är julen förbi.",
+"Vad händer om ugglan tar av sig glasögonen? – Den ser inte klok ut.",
+"Vilken krydda är gästvänligast? – Kumm-in!",
+"Vilken typ av kaffe gillar bönder? – Kokaffe.",
+"Vilket träd växer det pengar på? – Plån-boken.",
+"Har du sett filmen om lastbilen? – Nej, men jag har sett trailern.",
+"Varför är det så många rullstolsbundna på golfbanan? – De försöker minska sitt handicap.",
+"Truten måste vara den mest musikaliska fågeln, för det är ju en Mozart.",
+"Vad kallar man en skilsmässa i Göteborg? – En päron splitt.",
+"Varför är det farligt att äta för många halstabletter? – Man kan hamna på mentolsjukhus.",
+"Varför fick skelettspecialisten sparken från sjukhuset? – Han rönka på jobbet.",
+"Vilket förvaringsutrymme är roligast? – Kullager.",
+"Jag tänkte bjuda en zombie på middag.– Jag lovar att han äter mer än hjärna…",
+"Vad säger en Göteborgare till ett Star Wars fan? – JeeDaaaj.",
+"Varför är det ingen snö på gatorna i Glasgow på vintern? – De e la klart. 600 000 skottar.",
+"Hur vet man att en dykarkurs är inställd?",
+"Instruktören dyker inte upp!",
+"Hur många bor det i Stockholm? – En dryg miljon!",
+"En göteborgare frågade Jesus, vad gör du i påsk? – Vet inte, jag har inget spikat.",
+"Hur tar man med sig en hund genom tullen? – Tax-Free såklart!",
+"Vad anser du om läget i Angola? – De Ango-la-inte mig!",
+"Vad är tandläkarnas favoritsport? – Fluorball.",
+"Vilket land har det billigaste köttet? – Korea. (Ko-rea)",
+"Vilken kroppsdel är mest kriminell? – Hälarna.",
+"Hur många människor bor det i Tyskland? – Gööööörmäny!",
+"Vad gör en arbetslös skådespelare? – Spelar väl ingen roll?",
+"I vilken stad bor det flest pirater? – Arrrrrrrrrrrrboga!",
+"Gick det bra med rymdresan? – Nej, den blev uppskjuten.",
+"Hur tröstar man en vegan? – Soja, soja!",
+"Vilket djur är jordens största? – Eeeen-orm!",
+"Hur många göteborgare bor det i Kanada? – Åttava?",
+"I vilken stad tar bilköerna aldrig slut? – Konstantinopel.",
+"Ser du mycket på Ishockey? – Nej, bara periodvis.",
+"Vad är det som är kladdigt i matteboken? – Pytagoras Sats.",
+"Är det sant att din hund kan räkna? – Ja, han är väldigt förtjust i matte."
         ];
 
         function getAnswer() {
             const randomIndex = Math.floor(Math.random() * responses.length);
             let answer = responses[randomIndex];
-            
-            answer = "Jag kan inte hjälpa dig med just det men jag kan dra en gbg-vits för dig.<br /><br />" + answer.replace(" – ", "<br />– ");
-            
+
+            // Ersätter " – " med en radbrytning före strecket
+            answer = answer.replace(" – ", "<br />– ");
+
             const messagesDiv = document.getElementById("messages");
             const userMessage = document.createElement("div");
             userMessage.classList.add("message", "user-message");
@@ -111,7 +227,7 @@
 
             const aiMessage = document.createElement("div");
             aiMessage.classList.add("message", "ai-message");
-            aiMessage.innerHTML = answer;
+            aiMessage.innerHTML = answer; // Använd innerHTML för att tolka <br />
 
             messagesDiv.appendChild(userMessage);
             messagesDiv.appendChild(aiMessage);
