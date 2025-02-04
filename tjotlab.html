@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TjötGBG - AI Chat</title>
+    <title>TjôtGBG - AI Chat</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -89,13 +89,23 @@
 
     <script>
         const responses = [
-"Vad gör The Boss, när han får huvudvärk?" <br /> "– Han tar ju Bruce-tabletter.",
- "Vad gör The Boss, när han får huvudvärk?" <br /> "– Han tar ju Bruce-tabletter."
+            "Varför kan en abborre och en mört inte få barn? – För det blir abbört.",
+            "Båtmässan borde slås ihop med MC-mässan och byta namn till? – Skepp O’hoj.",
+            "Vad heter Finlands sämsta bärplockare? – Maski Hallonen.",
+            "Vad blir det om man lagar bilen på en söndag? – Söndagsbilaga.",
+            "Vad heter Rysslands snabbaste korvstoppare? – Korv-ba´-tjoff.",
+            "Vad får man om man kapar benen av en gås? – S, eftersom den inte längre kan gå.",
+            "4 hundar och 1 dog.",
+            "Vad är det där för blandras som du går omkring med? – Jo, jag hade en ångerfull schäfer som försökte göra en pudel.",
+            "Vad heter Läderlappens rika kusin? – Tusenlappen."
         ];
 
         function getAnswer() {
             const randomIndex = Math.floor(Math.random() * responses.length);
-            const answer = responses[randomIndex];
+            let answer = responses[randomIndex];
+
+            // Ersätter " – " med en radbrytning före strecket
+            answer = answer.replace(" – ", "<br />– ");
 
             const messagesDiv = document.getElementById("messages");
             const userMessage = document.createElement("div");
@@ -104,7 +114,7 @@
 
             const aiMessage = document.createElement("div");
             aiMessage.classList.add("message", "ai-message");
-            aiMessage.textContent = answer;
+            aiMessage.innerHTML = answer; // Använd innerHTML för att tolka <br />
 
             messagesDiv.appendChild(userMessage);
             messagesDiv.appendChild(aiMessage);
