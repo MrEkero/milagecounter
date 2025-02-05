@@ -90,14 +90,20 @@
     table {
         width: 500px;
         border-collapse: collapse;
+        margin: 0 auto; /* Centrera tabellen horisontellt */
     }
     td {
-        vertical-align: top;
+        vertical-align: middle; /* Centrera texten lodrätt */
         padding: 10px;
+    }
+    td:nth-child(2) {
+        text-align: left; /* Vänsterställ texten i andra kolumnen */
     }
     img {
         max-width: 150px; /* Anpassa storleken efter behov */
         height: auto;
+        display: block; /* Säkerställ att bilden inte har extra mellanrum */
+        margin: 0 auto; /* Centrera bilden i sin cell */
     }
         
     </style>
@@ -115,20 +121,23 @@
         </div>
     </div>
 <center><br>TjôtGBG - AI Chat har inget samabete med Kina eller Elon Musk
-    <div class="footer">
-<table>
-    <tr>
-        <td>
-            <img src="https://raw.githubusercontent.com/MrEkero/milagecounter/refs/heads/main/chalmers.jpg" alt="Chalmers logotyp">
-        </td>
-        <td>
-            Forskar, utbildar och samverkar inom teknik,<br> 
-            naturvetenskap, sjöfart och arkitektur, med en<br>
-            hållbar framtid som vision. test
-        </td>
-    </tr>
-</table></center>
+</center>
     </div>
+<div class="footer">
+    <table>
+        <tr>
+            <td>
+                <img src="https://raw.githubusercontent.com/MrEkero/milagecounter/refs/heads/main/chalmers.jpg" alt="Chalmers logotyp">
+            </td>
+            <td>
+                Forskar, utbildar och samverkar inom teknik,<br> 
+                naturvetenskap, sjöfart och arkitektur, med en<br>
+                hållbar framtid som vision. test
+            </td>
+        </tr>
+    </table>
+</div>
+
     <script>
         const responses = [
 "Varför kan en abborre och en mört inte få barn? – För det blir abbört.",
