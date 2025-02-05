@@ -1,0 +1,48 @@
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+
+export default function PokeTheBunny() {
+  const [pokeCount, setPokeCount] = useState(0);
+  const [threshold, setThreshold] = useState(() => Math.floor(Math.random() * 10) + 3);
+  const [isBiting, setIsBiting] = useState(false);
+
+  useEffect(() => {
+    if (pokeCount >= threshold) {
+      setIsBiting(true);
+    }
+  }, [pokeCount, threshold]);
+
+  const handlePoke = () => {
+    if (!isBiting) {
+      setPokeCount(pokeCount + 1);
+    }
+  };
+
+  const resetGame = () => {
+    setPokeCount(0);
+    setThreshold(Math.floor(Math.random() * 10) + 3);
+    setIsBiting(false);
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-center h-screen bg-blue-100">
+      <Card className="p-5">
+        <CardContent className="flex flex-col items-center">
+          <motion.div
+            className="w-32 h-32 bg-white border rounded-full flex items-center justify-center text-3xl cursor-pointer shadow-lg"
+            whileTap={{ scale: 0.8 }}
+            animate={{ rotate: isBiting ? [0, 10, -10, 0] : 0 }}
+            transition={{ duration: 0.2, repeat: isBiting ? 2 : 0 }}
+            onClick={handlePoke}
+          >
+            {isBiting ? "🦷" : "🐰"}
+          </motion.div>
+          <p className="mt-4 text-lg">{isBiting ? "Kaninen bet dig! 😲" : "Peta på kaninen!"}</p>
+          {isBiting && <Button className="mt-4" onClick={resetGame}>Försök igen</Button>}
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
