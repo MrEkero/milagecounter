@@ -196,7 +196,7 @@ function setCookie(name, value, days) {
 
       if (todaysData) {
         document.getElementById('todays-info').innerHTML = `
-          Rekommenderad max körsträcka<br> fram till idag 
+          Recommended maximum mileage as of <br> fram till idag 
           <span class="highlight">${todaysData.Datum}</span><br>
           <span class="highlightMILE">${todaysData.Antalmil} mil</span><br>
         `;
@@ -232,7 +232,7 @@ setCookie('startDate', startDateInput, 3650);
 setCookie('endDate', endDateInput, 3650);
 setCookie('distance', distanceInput, 3650);
 
-      const output = `Leasingbil uttagen: ${startDateInput}\nÅterlämnas: ${endDateInput}\nMax körsträcka för perioden: ${distanceInput} mil`;
+      const output = `Leased vehicle delivery date: : ${startDateInput}\nReturn date: ${endDateInput}\nMaximum mileage for the lease period:  ${distanceInput} mil`;
       document.getElementById('output').innerText = output;
     }
 
